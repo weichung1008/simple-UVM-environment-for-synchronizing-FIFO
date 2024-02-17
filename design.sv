@@ -1,7 +1,7 @@
 module sync_fifo#(
 	parameter WIDTH=16,
 	parameter DEPTH=8,
-  parameter PTR_ADDR=3
+	parameter PTR_ADDR=3
 )
 (
 	input wr_en,
@@ -9,8 +9,8 @@ module sync_fifo#(
 	input [WIDTH-1:0]data_in,
 	input rst_n,
 	input clk,
-  output empty,
-  output full,
+	output empty,
+	output full,
 	output reg [WIDTH-1:0]data_out
 );
 
@@ -18,7 +18,7 @@ module sync_fifo#(
 	reg [PTR_ADDR:0]wr_ptr, rd_ptr;
 	
 	assign full = ((wr_ptr-rd_ptr)==DEPTH);
-  assign empty = (wr_ptr==rd_ptr);
+	assign empty = (wr_ptr==rd_ptr);
 
 	always@(posedge clk or negedge rst_n)
 	begin
@@ -30,7 +30,7 @@ module sync_fifo#(
 	
 	always@(posedge clk or negedge rst_n)
 	begin
-	  if(!rst_n)
+	  	if(!rst_n)
 			rd_ptr <= 4'h0;
 		else if(rd_en && !empty)
 			rd_ptr <= rd_ptr + 1'b1;
