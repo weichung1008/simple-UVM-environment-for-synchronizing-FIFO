@@ -44,6 +44,6 @@ module sync_fifo#(
 			fifo[wr_ptr[PTR_ADDR-1:0]] <= data_in;
 	end
 	
-  assign data_out = (rd_en & !empty) ? fifo[rd_ptr[PTR_ADDR-1:0]] : 16'h0;
+	assign data_out = (rd_en & !empty) ? fifo[rd_ptr[PTR_ADDR-1:0]] : 16'h0;
 	
 endmodule
