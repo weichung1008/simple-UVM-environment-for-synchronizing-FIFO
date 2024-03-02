@@ -1,6 +1,9 @@
+typedef class my_driver_callback;
+
 class my_driver extends uvm_driver#(my_trans);
   
   `uvm_component_utils(my_driver)
+  `uvm_register_cb(my_driver, my_driver_callback)
   
   vif drv_vif;
   my_trans drv_tr;
@@ -19,7 +22,9 @@ class my_driver extends uvm_driver#(my_trans);
     forever begin
       reset();
       seq_item_port.get_next_item(drv_tr);
-      `uvm_info(get_full_name, "after get next item", UVM_HIGH)
+      // callback hook
+      `uvm_do_callbacks(my_driver, my_driver_callback, pre_print(this, drv_tr))
+      //`uvm_info(get_full_name, "after get next item", UVM_HIGH)
       drive();
       seq_item_port.item_done();
       `uvm_info("after item done", $sformatf("drv_tr.wr_en=%0b, drv_tr.rd_en=%0b, drv_tr.data_in=%0h", drv_tr.wr_en, drv_tr.rd_en, drv_tr.data_in), UVM_HIGH)
@@ -37,7 +42,7 @@ class my_driver extends uvm_driver#(my_trans);
   endtask
   
   virtual task drive();
-    //@(drv_vif.drv_cb);
+    //@(drv_vif.drv_cb); //recommand
     if(drv_tr.wr_en) begin
       if(!drv_vif.drv_cb.full) begin
         drv_vif.drv_cb.wr_en <= drv_tr.wr_en;
