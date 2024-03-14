@@ -16,9 +16,10 @@
 `include "test_rd_wr_con.sv"
 `include "test_rd_wr_mix.sv"
 `include "test_rd_wr_with_cb.sv"
+`include "test_rd_wr_with_DPI.sv"
 
 module tb_sync_fifo;
-
+  
   parameter WIDTH=16;
 	
   bit wr_en, rd_en;
