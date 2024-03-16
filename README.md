@@ -26,5 +26,8 @@ One is the test bench, and the other is the design.
         - Need to import function name in the file which called C function
 
 Simulation environment: 
-![image](https://github.com/weichung1008/simple-UVM-environment-for-synchronizing-FIFO/assets/160299780/365a2a4c-62a9-44d2-abfc-7d3bdfc66d1a)
+![image](https://github.com/weichung1008/simple-UVM-environment-for-synchronizing-FIFO/assets/160299780/ee5089ac-5cf1-4ac7-96e4-1ad36206a1de)
+
+
+
 
