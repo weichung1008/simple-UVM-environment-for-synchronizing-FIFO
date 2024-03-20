@@ -11,8 +11,8 @@ module sync_fifo#(
 	input clk,
 	output empty,
 	output full,
-  output interrupt,
-  output [WIDTH-1:0]data_out
+        output interrupt,
+        output [WIDTH-1:0]data_out
 );
 
 
@@ -66,11 +66,11 @@ module sync_fifo#(
 		else if(reg_int)
 			cnt <= cnt + 1'b1;
 		else
-		cnt <= 0;
+		        cnt <= 0;
 	end
   
 	assign interrupt = (cnt==8'd16) ? 1'b1 : 1'b0;
 	
-  assign data_out = (rd_en & !empty) ? fifo[rd_ptr[PTR_ADDR-1:0]] : data_out;
+        assign data_out = (rd_en & !empty) ? fifo[rd_ptr[PTR_ADDR-1:0]] : data_out;
 	
 endmodule
