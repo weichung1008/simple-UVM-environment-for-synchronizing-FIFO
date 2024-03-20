@@ -11,7 +11,7 @@ class test_wr_only extends my_test;
   virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
     wseq=wr_seq::type_id::create("wseq");
-    uvm_config_db#(int)::set(null, "", "wr_repeat_num", 9);
+    uvm_config_db#(int)::set(null, "", "wr_repeat_num", 4);
   endfunction
   
   virtual task run_phase(uvm_phase phase);

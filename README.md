@@ -7,7 +7,7 @@ One is the test bench, and the other is the design.
 - testbench
   - design: This design is sync_fifo in this simple example.
   - interface: Connects the design and UVM environment, and transmits signals and data.
-  - test: The UVM Test is the top-level UVM Component in the UVM Testbench. In this example, there are different tests, e.g., test_wr_only, test_rd_only, test_wr_rd_sequential, test_rd_wr_concurrent, test_rd_wr_random, test_rd_wr_with_cb, and test_rd_wr_with_DPI.
+  - test: The UVM Test is the top-level UVM Component in the UVM Testbench. In this example, there are different tests, e.g., test_wr_only, test_rd_only, test_wr_rd_sequential, test_rd_wr_concurrent, test_rd_wr_random, test_rd_wr_with_cb, test_rd_wr_with_DPI, test_full, and test_empty.
     - environment: It groups other interrelated verification components. 
       - scoreboard: It is used to check the behavior of a certain DUT.
       - slave_agent: Accepts data transfer requests, control signals, and commands from the Master Agent and executes the corresponding operations.
