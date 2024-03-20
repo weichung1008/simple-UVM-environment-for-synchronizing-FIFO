@@ -6,7 +6,7 @@ class my_driver extends uvm_driver#(my_trans);
   `uvm_register_cb(my_driver, my_driver_callback)
   
   vif drv_vif;
-  my_trans drv_tr;
+  my_trans drv_tr, tr_rsp;
   
   function new(string name="my_driver", uvm_component parent);
     super.new(name, parent);
@@ -33,21 +33,22 @@ class my_driver extends uvm_driver#(my_trans);
   
   virtual task reset();
     while(!drv_vif.rst_n) begin
-      //@(drv_vif.drv_cb);
+      @(drv_vif.drv_cb);
       drv_vif.drv_cb.wr_en <= 1'b0;
       drv_vif.drv_cb.rd_en <= 1'b0;
       drv_vif.drv_cb.data_in <= 16'hffff;
-      @(drv_vif.drv_cb);
+      //@(drv_vif.drv_cb);
     end
   endtask
   
   virtual task drive();
-    //@(drv_vif.drv_cb); //recommand
+    @(drv_vif.drv_cb); //recommand
+    drv_vif.drv_cb.wr_en <= drv_tr.wr_en;
+    drv_vif.drv_cb.rd_en <= drv_tr.rd_en;
     if(drv_tr.wr_en) begin
+      drv_vif.drv_cb.data_in <= drv_tr.data_in;
       if(!drv_vif.drv_cb.full) begin
-        drv_vif.drv_cb.wr_en <= drv_tr.wr_en;
-        drv_vif.drv_cb.rd_en <= drv_tr.rd_en;
-        drv_vif.drv_cb.data_in <= drv_tr.data_in;
+        `uvm_info("Push", "Push.", UVM_MEDIUM)
       end
       else begin
         `uvm_info("FIFO is full", "FIFO is full.", UVM_MEDIUM)
@@ -55,14 +56,13 @@ class my_driver extends uvm_driver#(my_trans);
     end
     else if(drv_tr.rd_en) begin
       if(!drv_vif.drv_cb.empty) begin
-        drv_vif.drv_cb.wr_en <= drv_tr.wr_en;
-        drv_vif.drv_cb.rd_en <= drv_tr.rd_en;
+        `uvm_info("Pop", "Pop.", UVM_MEDIUM)
       end
       else begin
         `uvm_info("FIFO is empty", "FIFO is empty.", UVM_MEDIUM)
       end
     end
-    @(drv_vif.drv_cb);
+    //@(drv_vif.drv_cb);
   endtask
     
 endclass
