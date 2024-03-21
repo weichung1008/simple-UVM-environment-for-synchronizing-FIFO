@@ -4,6 +4,7 @@ There are two parts to the simple UVM example.
 One is the test bench, and the other is the design.
 - design: sync_fifo.
   - Description: This design is a synchronous FIFO with parameterizable input and output, as well as the depth of the FIFO. It uses read and write pointers to determine whether the FIFO is empty or full.
+    If a full or empty value occurs, the design will wait for a while to check if a read or write is coming.
 - testbench
   - design: This design is sync_fifo in this simple example.
   - interface: Connects the design and UVM environment, and transmits signals and data.
