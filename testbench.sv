@@ -1,4 +1,4 @@
-`include "uvm_env_pkg.sv"
+`include "uvm_tb_files.sv"
 
 module tb_sync_fifo;
   
