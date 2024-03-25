@@ -9,7 +9,7 @@ class my_isr_seq extends my_sequence;
   
   virtual task pre_start();
     int_e=uvm_event_pool::get_global("T_INT");
-    //int_e=uvm_event_pool::get_global("T_INT1"); // If the string name isn't match the name in monitor, the event won't happen.
+    //int_e=uvm_event_pool::get_global("T_INT1"); // If the string name doesn't match the name in monitor, the event won't happen.
   endtask
   
   virtual task body();
