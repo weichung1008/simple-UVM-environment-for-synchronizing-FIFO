@@ -13,7 +13,6 @@ class my_isr_seq extends my_sequence;
   endtask
   
   virtual task body();
-    //forever begin
       `uvm_info(get_full_name(), $sformatf("Wait INT"), UVM_MEDIUM)
       
       int_e.wait_trigger();
@@ -28,7 +27,6 @@ class my_isr_seq extends my_sequence;
       
       int_e.reset();
       `uvm_info("ISR finished", "ISR", UVM_MEDIUM)
-    //end
   endtask
   
 endclass
