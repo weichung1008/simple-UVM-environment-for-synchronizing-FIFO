@@ -8,7 +8,7 @@ One is the test bench, and the other is the design.
 - testbench
   - design: This design is sync_fifo in this simple example.
   - interface: Connects the design and UVM environment, and transmits signals and data.
-  - test: The UVM Test is the top-level UVM Component in the UVM Testbench. In this example, there are different tests, e.g., test_wr_only, test_rd_only, test_wr_rd_sequential, test_rd_wr_concurrent, test_rd_wr_random, test_rd_wr_with_cb, test_rd_wr_with_DPI, test_full, and test_empty.
+  - test: The UVM Test is the top-level UVM Component in the UVM Testbench. In this example, there are different tests, e.g., test_wr_only, test_rd_only, test_wr_rd_sequential, test_rd_wr_concurrent, test_rd_wr_random, test_rd_wr_with_cb, test_rd_wr_with_DPI, test_full_interrupt, and test_empty_interrupt.
     - environment: It groups other interrelated verification components. 
       - scoreboard: It is used to check the behavior of a certain DUT.
       - slave_agent: Accepts data transfer requests, control signals, and commands from the Master Agent and executes the corresponding operations.
@@ -25,9 +25,12 @@ One is the test bench, and the other is the design.
   - C code: Simple function to display transaction id of write and read transactions
       - Additional test for DPI testing
         - Need to import function name in the file which called C function
+  - Interrupt service routine (ISR): Add a new sequence, my_isr_seq, to simulate the situation when an interrupt occurs.
+      - The interrupt is monitored by the monitor. If the interrupt happens, the wr_en and rd_en will be assigned to 0, and the data_in will be assigned to 16'hffff by my_isr_seq.
 
 Simulation environment: 
-![image](https://github.com/weichung1008/simple-UVM-environment-for-synchronizing-FIFO/assets/160299780/1f555501-7f90-4564-8378-a388e4e42959)
+![image](https://github.com/weichung1008/simple-UVM-environment-for-synchronizing-FIFO/assets/160299780/c0998ea8-8e47-4474-881c-78dd3ddac8c5)
+
 
 
 
