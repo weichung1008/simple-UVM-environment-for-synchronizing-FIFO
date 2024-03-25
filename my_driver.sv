@@ -62,6 +62,10 @@ class my_driver extends uvm_driver#(my_trans);
         `uvm_info("FIFO is empty", "FIFO is empty.", UVM_MEDIUM)
       end
     end
+    if(drv_vif.interrupt) begin
+      `uvm_info("ISR", "Drive specific data when an interrupt happens.", UVM_MEDIUM)
+      drv_vif.drv_cb.data_in <= drv_tr.data_in;
+    end
     //@(drv_vif.drv_cb);
   endtask
     

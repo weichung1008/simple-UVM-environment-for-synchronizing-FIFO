@@ -9,6 +9,7 @@ module tb_sync_fifo;
   bit rst_n;
   bit clk;
   bit empty, full;
+  bit interrupt;
   bit [WIDTH-1:0]data_out;
 
   my_intf intf(clk, rst_n);
@@ -21,6 +22,7 @@ module tb_sync_fifo;
     .clk       (intf.clk), 
     .empty     (intf.empty),
     .full      (intf.full),
+    .interrupt (intf.interrupt),
     .data_out  (intf.data_out)
   );
   
@@ -46,7 +48,7 @@ module tb_sync_fifo;
   initial begin
     $display("%0t : dump block", $time);
     $dumpfile("dump.vcd");
-		$dumpvars;
+    $dumpvars;
   end
   
 endmodule
