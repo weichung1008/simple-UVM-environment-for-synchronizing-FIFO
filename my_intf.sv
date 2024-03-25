@@ -8,6 +8,7 @@ interface my_intf(input logic clk, rst_n);
   logic full;
   logic [WIDTH-1:0]data_in;
   logic [WIDTH-1:0]data_out;
+  logic interrupt;
   
   clocking drv_cb@(posedge clk);
     output wr_en;
