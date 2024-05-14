@@ -22,4 +22,10 @@ class my_trans extends uvm_sequence_item;
     super.new(name);
   endfunction
 
+  
+  constraint data_in_dist
+  {
+    data_in dist {[0:8191]:/1, [8192:16383]:/1, [16384:24575]:/1, [24576:32767]:/1, [32768:$]:/1};
+  }
+  
 endclass
