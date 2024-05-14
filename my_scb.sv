@@ -48,7 +48,7 @@ class my_scb extends uvm_scoreboard;
       
       scb_mst_tr=mst_q.pop_front();
       scb_slv_tr=slv_q.pop_front();
-      `uvm_info(get_full_name(), "Compare output data from FIFO", UVM_MEDIUM)
+      `uvm_info(get_full_name(), "Compare output data from FIFO", UVM_HIGH)
       if(scb_mst_tr.data_in==scb_slv_tr.data_out)
         `uvm_info("compare pass", $sformatf("Correct. data in : %0h, data out : %0h", scb_mst_tr.data_in, scb_slv_tr.data_out), UVM_MEDIUM)
       else
