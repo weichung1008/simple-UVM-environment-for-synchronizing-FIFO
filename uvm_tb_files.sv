@@ -7,6 +7,7 @@
 `include "my_monitor.sv"
 `include "my_agent.sv"
 `include "my_scb.sv"
+`include "my_cov.sv"
 `include "my_env.sv"
 `include "my_driver_callback.sv"
 `include "drv_print_cb.sv"
