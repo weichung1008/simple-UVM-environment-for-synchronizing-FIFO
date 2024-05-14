@@ -24,7 +24,6 @@ class my_driver extends uvm_driver#(my_trans);
       seq_item_port.get_next_item(drv_tr);
       // callback hook
       `uvm_do_callbacks(my_driver, my_driver_callback, pre_print(this, drv_tr))
-      //`uvm_info(get_full_name, "after get next item", UVM_HIGH)
       drive();
       seq_item_port.item_done();
       `uvm_info("after item done", $sformatf("drv_tr.wr_en=%0b, drv_tr.rd_en=%0b, drv_tr.data_in=%0h", drv_tr.wr_en, drv_tr.rd_en, drv_tr.data_in), UVM_HIGH)
@@ -48,25 +47,25 @@ class my_driver extends uvm_driver#(my_trans);
     if(drv_tr.wr_en) begin
       drv_vif.drv_cb.data_in <= drv_tr.data_in;
       if(!drv_vif.drv_cb.full) begin
-        `uvm_info("Push", "Push.", UVM_MEDIUM)
+        `uvm_info("Push", "Push.", UVM_HIGH)
       end
       else begin
-        `uvm_info("FIFO is full", "FIFO is full.", UVM_MEDIUM)
+        `uvm_info("FIFO is full", "FIFO is full.", UVM_HIGH)
       end
     end
     else if(drv_tr.rd_en) begin
       if(!drv_vif.drv_cb.empty) begin
-        `uvm_info("Pop", "Pop.", UVM_MEDIUM)
+        `uvm_info("Pop", "Pop.", UVM_HIGH)
       end
       else begin
-        `uvm_info("FIFO is empty", "FIFO is empty.", UVM_MEDIUM)
+        `uvm_info("FIFO is empty", "FIFO is empty.", UVM_HIGH)
       end
     end
     if(drv_vif.interrupt) begin
       `uvm_info("ISR", "Drive specific data when an interrupt happens.", UVM_MEDIUM)
       drv_vif.drv_cb.data_in <= drv_tr.data_in;
     end
-    //@(drv_vif.drv_cb);
+    `uvm_info("driver transaction", $sformatf("drv_tr %s", drv_tr.sprint()), UVM_HIGH)
   endtask
     
 endclass
