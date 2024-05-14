@@ -22,7 +22,7 @@ class my_monitor extends uvm_monitor;
   endfunction
       
   virtual task run_phase(uvm_phase phase);
-    forever begin
+    forever begin      
       mon_tr = my_trans::type_id::create("mon_tr", this);
       
       mon_tr.wr_en = mon_vif.mon_cb.wr_en;
@@ -32,12 +32,16 @@ class my_monitor extends uvm_monitor;
       mon_tr.data_in = mon_vif.mon_cb.data_in;
       mon_tr.data_out = mon_vif.mon_cb.data_out;
       mon_tr.interrupt = mon_vif.interrupt;
-      //mon_tr.print();
-      `uvm_info("before write", $sformatf("mon_tr.wr_en=%0b, mon_tr.full=%0b, mon_tr.rd_en=%0b, mon_tr.empty=%0b, mon_tr.data_in=%0h, mon_tr.data_out=%0h", mon_tr.wr_en, mon_tr.full, mon_tr.rd_en, mon_tr.empty, mon_tr.data_in, mon_tr.data_out), UVM_HIGH)
+      `uvm_info("monitor before clock", $sformatf("mon_tr %s", mon_tr.sprint()), UVM_HIGH)
       @(mon_vif.mon_cb);
+      `uvm_info("monitor after clock", $sformatf("mon_tr %s", mon_tr.sprint()), UVM_HIGH)
       mon_ap.write(mon_tr);
-      @(posedge mon_vif.interrupt)
-      int_e.trigger();
+      fork
+        begin
+          @(posedge mon_vif.interrupt);
+          int_e.trigger();
+        end
+      join_none
     end
   endtask
   

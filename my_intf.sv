@@ -26,6 +26,7 @@ interface my_intf(input logic clk, rst_n);
     input full;
     input data_in;
     input data_out;
+    input interrupt;
   endclocking
   
 endinterface

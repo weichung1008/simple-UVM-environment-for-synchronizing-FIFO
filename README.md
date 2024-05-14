@@ -29,7 +29,7 @@ One is the test bench, and the other is the design.
       - The interrupt is monitored by the monitor. If the interrupt happens, the wr_en and rd_en will be assigned to 0, and the data_in will be assigned to 16'hffff by my_isr_seq.
 
 Simulation environment: 
-![image](https://github.com/weichung1008/simple-UVM-environment-for-synchronizing-FIFO/assets/160299780/c0998ea8-8e47-4474-881c-78dd3ddac8c5)
+![image](https://github.com/weichung1008/simple-UVM-environment-for-synchronizing-FIFO/assets/160299780/654de44d-82bf-41ef-a893-c9b5282182fb)
 
 
 
